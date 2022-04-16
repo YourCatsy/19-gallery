@@ -1,4 +1,4 @@
-class TodoApi {
+class ListApi {
     static URL = 'https://jsonplaceholder.typicode.com/albums';
     static URL_ID = 'https://jsonplaceholder.typicode.com/photos?albumId=';
     static getList() {
@@ -34,6 +34,4 @@ class TodoApi {
             throw new Error('Невозможно обновить список.');
         });
     }
-
 }
-export default TodoApi;

@@ -1,6 +1,41 @@
-import TodoApi from "./TodoApi.js";
+class ListApi {
+    static URL = 'https://jsonplaceholder.typicode.com/albums';
+    static URL_ID = 'https://jsonplaceholder.typicode.com/photos?albumId=';
+    static getList() {
+        return fetch(this.URL)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Нет списка.');
+        });
+    }
 
-'use strict';
+    static getOne(id) {
+        return fetch(this.URL_ID + id)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(`Нет строки с id '${id}'.`);
+        });
+    }
+    static update(id, todo) {
+        return fetch(this.URL + id, {
+            method: 'PUT',
+            body: JSON.stringify(todo),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        }).then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Невозможно обновить список.');
+        });
+    }
+}
+
 
 const TODO_ITEM_CLASS = 'todo-item';
 const DONE_CLASS = 'done';
@@ -15,7 +50,7 @@ listEl.addEventListener('click', onLineClick);
 init();
 
 function init() {
-    TodoApi.getList()
+    ListApi.getList()
         .then((list) => {
 
             renderTodoList(list)
@@ -32,7 +67,7 @@ function onLineClick(e) {
         const id = getTodoElId(todoEl);
 
         if (id) {
-            TodoApi.getOne(id)
+            ListApi.getOne(id)
                 .then((list) => {
                     renderAlbumList(list)
                 })
@@ -58,7 +93,6 @@ function generateTodoHtml(list) {
         .replaceAll('{{title}}', list.title)
         .replace('{{done}}', done);
 }
-
 
 function renderAlbumList(list) {
     const html = list.map(generateAlbumHtml).join('');

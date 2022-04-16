@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./vendor.css">
+    <link rel="stylesheet" href="./app.css">
+    <script src="./vendor.js"  defer></script>
+    <script src="./app.js"  defer></script>
+    
+</head>
+
+<body>
+    <section class="position">
+        <ul class="todo-list"></ul>
+        <div class="todo-album"></div>
+    </section>
+</body>
+
+<script id="newTaskTemplate" type="text/template">
+    <li
+         class="todo-item {{done}}"
+        data-id="{{id}}"
+        data-status="{{status}}"
+        data-title ='{{title}}'
+        >
+        <a href="">{{title}}</a>
+       
+    </li>
+    </script>
+
+<script id="album-photo-template" type="text/template">
+        <img src="{{image-src}}">
+    </script>
+
+
+</html>
